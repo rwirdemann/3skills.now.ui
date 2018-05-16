@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
+    <body>
+        <div th:fragment="content">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-start align-items-start">
+                    <img class="w-25 img-fluid rounded"  th:src="@{/images/ralf.jpg}" alt="Card image cap">
+                    <div class="d-flex flex-column m-2">
+                        <div>
+                            Ich programmiere seit 18 Jahren in Java und
+                            habe alles gesehen. Ich kann sehr gut lehren
+                            und programmiere gerne selber.
+                        </div>
+                        <div>
+                            <div class="p-1 badge badge-primary">Coaching</div>
+                            <div class="p-1 badge badge-secondary">Workshops</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
