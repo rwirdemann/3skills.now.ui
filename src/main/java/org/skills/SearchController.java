@@ -18,17 +18,21 @@ public class SearchController {
 
     @GetMapping("/result")
     public String result(Model model) {
-        Card c1 = new Card();
-        c1.setDescription("Ich programmiere seit 18 Jahren in Java und habe alles gesehen. Ich kann sehr gut lehren und programmiere gerne selber.");
-        c1.setImage("ralf");
+        Card c1 = createCard("r1", "Java");
+        Card c2 = createCard("jing", "C++");
+        Card c4 = createCard("baustert", "Java");
 
-        Card c2 = new Card();
-        c2.setDescription("Ich programmiere seit 18 Jahren in Java und habe alles gesehen. Ich kann sehr gut lehren und programmiere gerne selber.");
-        c2.setImage("placeholder");
-
-        List<Card> cards = Arrays.asList(c1, c2);
+        List<Card> cards = Arrays.asList(c1, c2, c4);
         model.addAttribute("cards", cards);
         return "result";
+    }
+
+    private Card createCard(String placeholder, String skill) {
+        Card c2 = new Card();
+        c2.setDescription("Ich programmiere seit 18 Jahren in Java und habe alles gesehen. Ich kann sehr gut lehren und programmiere gerne selber. ");
+        c2.setImage(placeholder);
+        c2.setSkill(skill);
+        return c2;
     }
 
 }

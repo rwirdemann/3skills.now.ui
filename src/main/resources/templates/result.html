@@ -2,25 +2,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       th:include="layout :: page">
-    <body>
-        <div th:fragment="content">
-            <ul class="list-group">
-                <li th:each="c: ${cards}" class="list-group-item d-flex justify-content-start align-items-start">
-                    <img class="w-25 img-fluid rounded" th:src="@{${'/images/' + c.image + '.jpg'}}" />
-                    <div class="d-flex flex-column m-2">
-                        <strong>Java</strong>
-                        <div th:text="${c.description}"></div>
-                        <div>
-                            Rating: 123 booked days related to this skill
+<body>
+<div th:fragment="content">
+    <!--
+                <ul class="list-group">
+                    <li th:each="c: ${cards}" class="list-group-item d-flex justify-content-start align-items-start">
+                        <img class="img-fluid rounded" th:src="@{${'/images/' + c.image + '.jpg'}}" width="96px" height="96px" />
+                        <div class="d-flex flex-column" style="margin-left: 12px">
+                            <strong th:text="${c.skill}"></strong>
+                            <div th:text="${c.description}"></div>
+                            <div>
+                                Rating: 123 booked days related to this skill
+                            </div>
+                            <div>
+                                <div class="p-1 badge badge-success">Pairing</div>
+                                <div class="p-1 badge badge-success">Coaching</div>
+                                <div class="p-1 badge badge-secondary">Workshops</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="p-1 badge badge-success">Pairing</div>
-                            <div class="p-1 badge badge-success">Coaching</div>
-                            <div class="p-1 badge badge-secondary">Workshops</div>
+                    </li>
+                </ul>
+    -->
+    <ul class="list-group">
+        <li th:each="c: ${cards}" class="list-group-item">
+            <div class="row">
+                <div class="col-2">
+                    <img class="img-fluid rounded" th:src="@{${'/images/' + c.image + '.jpg'}}" width="96px"
+                         height="96px"/>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col align-self-start">
+                            <strong th:text="${c.skill}"></strong>
+                        </div>
+                        <div class="col">
+                            <span class="float-right">
+                                <div class="p-1 badge badge-success">Pairing</div>
+                                <div class="p-1 badge badge-success">Coaching</div>
+                                <div class="p-1 badge badge-secondary">Workshops</div>
+                            </span>
                         </div>
                     </div>
-                </li>
-            </ul>
+                    <div class="row">
+                        <div class="col">
+                            <small>Hamburg, verfügbar morgen, 200 Skillpoints</small>
+                            <div th:text="${c.description}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <img class="float-right" th:src="@{${'/images/calendar.png'}}" width="96px" height="96px"/>
+                    <div class="mt-1  badge badge-primary float-right" data-toggle="modal" data-target="#exampleModal" >Buchen</div>
+                </div>
+            </div>
+        </li>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Skill-Buchung erfolgreich</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Der Experte wurde verbindlich für Montag, den 27.6.2018 für Sie gebucht.
+                        Er wird sich innerhalb der nächsten Stunde mit Ihnen in Verbingung setzen.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Schliessen</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
+    </ul>
+</div>
+
+</body>
 </html>
