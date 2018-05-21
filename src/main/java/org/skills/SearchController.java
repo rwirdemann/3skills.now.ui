@@ -2,29 +2,63 @@ package org.skills;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 public class SearchController {
 
     @PostMapping("/search")
-    public String search() {
-        return "redirect:/result";
+    public String search(@ModelAttribute Query query) {
+        return "redirect:/result/" + query.getQ();
     }
 
-    @GetMapping("/result")
-    public String result(Model model) {
-        Card c1 = createCard("r1", "Java");
-        Card c2 = createCard("jing", "C++");
-        Card c4 = createCard("baustert", "Java");
+    @GetMapping("/result/{q}")
+    public String result(Model model, @PathVariable String q) {
+        if (q != null && !"".equals(q)) {
+            String[] split = q.split(",");
+            if (split.length == 2) {
+                q = split[0];
+            }
+        }
 
-        List<Card> cards = Arrays.asList(c1, c2, c4);
-        model.addAttribute("cards", cards);
+        model.addAttribute("cards", new ArrayList<>());
+
+        if (q.toLowerCase().equals("java")) {
+            model.addAttribute("cards", java());
+        }
+
+        if (q.toLowerCase().equals("c++")) {
+            model.addAttribute("cards", cpp());
+        }
+
+        if (q.toLowerCase().equals("aws")) {
+            model.addAttribute("cards", aws());
+        }
+
         return "result";
+    }
+
+    private List<Card> java() {
+        Card c1 = createCard("ralf", "Java");
+        Card c2 = createCard("jing", "Java");
+        Card c4 = createCard("baustert", "Java");
+        return Arrays.asList(c1, c2, c4);
+    }
+
+    private List<Card> cpp() {
+        Card c1 = createCard("frank", "C++");
+        return Arrays.asList(c1);
+    }
+
+    private List<Card> aws() {
+        Card c1 = createCard("marco", "AWS");
+        return Arrays.asList(c1);
     }
 
     private Card createCard(String placeholder, String skill) {

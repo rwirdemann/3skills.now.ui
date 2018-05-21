@@ -24,6 +24,11 @@
                 </ul>
     -->
     <ul class="list-group">
+        <div class="alert alert-primary" role="alert" th:if="${cards.empty}">
+            Leider keine passenden Skills gefunden.
+        </div>
+
+
         <li th:each="c: ${cards}" class="list-group-item">
             <div class="row">
                 <div class="col-2">
@@ -45,18 +50,21 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <small>Hamburg, verfügbar morgen, 200 Skillpoints</small>
+                            <small>Hamburg, verfügbar morgen, <strong>200 Skillpoints</strong></small>
                             <div th:text="${c.description}"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-2">
                     <img class="float-right" th:src="@{${'/images/calendar.png'}}" width="96px" height="96px"/>
-                    <div class="mt-1  badge badge-primary float-right" data-toggle="modal" data-target="#exampleModal" >Buchen</div>
+                    <button type="button" class="mt-2 float-right btn btn-outline-primary btn-sm" data-toggle="modal"
+                            data-target="#exampleModal">Buchen
+                    </button>
                 </div>
             </div>
         </li>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -76,7 +84,7 @@
             </div>
         </div>
     </ul>
+    <a class="float-right mt-1" href="/">Back to search</a>
 </div>
-
 </body>
 </html>
